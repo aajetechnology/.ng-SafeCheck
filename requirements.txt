@@ -1,5 +1,7 @@
 fastapi
-uvicorn
-python-dotenv
+uvicorn[standard]
 httpx
 pydantic
+python-dotenv
+slowapi
+pytz
