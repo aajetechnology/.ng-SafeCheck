@@ -2,7 +2,7 @@
 
 **One click. Know if it's real.**
 
-Live at: https://ngsafecheck.vercel.app (or your link)
+Live at: (or your link)
 
 ## The Problem
 Every day, Nigerians lose millions to fake .ng websites:
