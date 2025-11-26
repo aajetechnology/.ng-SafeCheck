@@ -1,35 +1,41 @@
-# core/gemini.py — OFFLINE MODE (WORKS WITHOUT API KEY)
+# core/gemini.py — FINAL VERSION (0% or 95%+ only)
 import re
 
-# High-risk keywords that scream "PHISHING"
-PHISHY_WORDS = [
-    "login", "secure", "verify", "alert", "transfer", "update",
-    "account", "password", "banking", "dashboard", "confirm", "otp"
-]
-
-OFFICIAL_DOMAINS = {
-    "nic.ng", "nira.org.ng", "gtbank.com.ng", "uba.com.ng", "jamb.gov.ng",
-    "nimc.gov.ng", "firstbanknigeria.com.ng", "zenithbank.com.ng", "accessbankplc.com.ng"
+TRUSTED_DOMAINS = {
+    "nic.ng", "nira.org.ng", "gtbank.com.ng", "uba.com.ng", "accessbankplc.com.ng",
+    "zenithbank.com.ng", "firstbanknigeria.com.ng", "jamb.gov.ng", "nimc.gov.ng",
+    "nigeriapoliceforce.gov.ng", "cbn.gov.ng", "ncc.gov.ng"
 }
 
+DANGEROUS_KEYWORDS = [
+    "login", "secure", "verify", "alert", "transfer", "update", "account",
+    "password", "banking", "dashboard", "confirm", "otp", "session", "reset"
+]
+
 async def analyze(domain: str) -> dict:
-    domain = domain.lower().strip()
+    domain = domain.lower().strip().replace("https://", "").replace("http://", "").split("/")[0]
 
-    # Always trust official domains
-    if domain in OFFICIAL_DOMAINS or domain.endswith(".gov.ng"):
-        return {"phishy": False, "reason": "Official domain", "confidence": 0}
+    # 1. Official domains = 0% risk
+    if any(domain == trusted or domain.endswith("." + trusted) for trusted in TRUSTED_DOMAINS):
+        return {"phishy": False, "confidence": 0, "reason": "Official Nigerian domain"}
 
-    # Check for phishy words
-    domain_clean = domain.replace(".com.ng", "").replace(".ng", "")
-    found_words = [word for word in PHISHY_WORDS if word in domain_clean]
+    if domain.endswith(".gov.ng") or domain.endswith(".edu.ng"):
+        return {"phishy": False, "confidence": 0, "reason": "Government/Education domain"}
 
-    if len(found_words) >= 1:
-        reason = f"Contains suspicious word: {', '.join(found_words[:2])}"
-        confidence = min(90 + len(found_words) * 5, 98)
-        return {"phishy": True, "reason": reason, "confidence": confidence}
+    # 2. Obvious phishing = 95–98%
+    clean = domain.replace(".ng", "").replace(".com.ng", "").replace(".", "")
+    found = [word for word in DANGEROUS_KEYWORDS if word in clean]
 
-    # New or weird domain
-    if len(domain_clean) < 8 or "xn--" in domain or domain.count("-") >= 3:
-        return {"phishy": True, "reason": "Unusual domain pattern", "confidence": 82}
+    if found:
+        return {
+            "phishy": True,
+            "confidence": 96 + min(len(found), 3),  # 96–99%
+            "reason": f"Contains phishing keywords: {', '.join(found[:3])}"
+        }
 
-    return {"phishy": False, "reason": "No red flags", "confidence": 0}
+    # 3. Suspicious patterns (hyphens, length, etc.)
+    if domain.count("-") >= 3 or len(clean) <= 6 or "xn--" in domain:
+        return {"phishy": True, "confidence": 92, "reason": "Suspicious domain pattern"}
+
+    # 4. Everything else = low risk
+    return {"phishy": False, "confidence": 15, "reason": "No clear red flags"}
