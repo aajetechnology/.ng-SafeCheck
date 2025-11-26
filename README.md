@@ -1,0 +1,2 @@
+# .ng-SafeCheck
+.ng SafeCheck
