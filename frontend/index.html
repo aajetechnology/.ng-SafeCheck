@@ -3,149 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>.ng SafeCheck — Nigeria's Phishing Shield</title>
+  <title>.ng SafeCheck — Protecting Nigeria</title>
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0F5132, #198754);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-    }
-    .container { max-width: 600px; width: 100%; text-align: center; z-index: 10; position: relative; }
-    h1 { font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .tagline { font-size: 1.4rem; opacity: 0.9; margin-bottom: 2rem; }
-
-    /* INPUT BOX — NOW 100% CLICKABLE & TYPEABLE */
-    .input-box {
-      display: flex;
-      gap: 15px;
-      margin: 2rem 0;
-      padding: 10px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-      position: relative;
-      z-index: 9999;
-    }
-    input {
-      flex: 1;
-      padding: 20px;
-      border: none;
-      outline: none;
-      font-size: 1.3rem;
-      border-radius: 16px;
-      color: #222;
-      background: transparent;
-    }
-    input::placeholder { color: #666; }
-    button {
-      padding: 0 35px;
-      background: #0F9D58;
-      color: white;
-      border: none;
-      border-radius: 16px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover { background: #0d8a4a; transform: scale(1.05); }
-
-    .result {
-      margin-top: 2rem;
-      padding: 2.5rem;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(12px);
-      border: 4px solid transparent;
-      display: none;
-    }
-    .big-text { font-size: 5rem; font-weight: 900; margin: 1rem 0; }
-    .safe { border-color: #0F9D58; }
-    .warning { border-color: #F4B400; }
-    .danger { border-color: #DB4437; animation: pulse 1.8s infinite; }
-
-    #reportBtn {
-      margin-top: 2rem;
-      padding: 20px 50px;
-      background: #FF1744;
-      color: white;
-      border: none;
-      border-radius: 16px;
-      font-size: 1.6rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(255,23,68,0.5);
-      animation: bounce 1.8s infinite;
-      display: none;
-    }
-    #reportBtn:hover { background: #D50000; transform: scale(1.1); }
-    #reportBtn.success { background: #0F9D58; animation: none; }
-
-    footer { margin-top: 4rem; opacity: 0.8; font-size: 1rem; }
-
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(219,68,55,0.7); } 70% { box-shadow: 0 0 0 30px rgba(219,68,55,0); } 100% { box-shadow: 0 0 0 0 rgba(219,68,55,0); } }
-    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+    body { background:#0d1b2a; color:white; text-align:center; padding:40px 20px; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .container { max-width:560px; width:100%; }
+    img { height:110px; margin-bottom:12px; filter:drop-shadow(0 6px 12px rgba(0,0,0,0.5)); }
+    h1 { font-size:3.2rem; font-weight:900; letter-spacing:-1px; margin:0; }
+    .tagline { font-size:1.3rem; opacity:0.9; margin:12px 0 30px; }
+    input { width:100%; padding:18px; font-size:1.3rem; border-radius:12px; border:none; margin-bottom:20px; text-align:center; }
+    button { padding:18px 40px; font-size:1.3rem; font-weight:bold; border:none; border-radius:12px; cursor:pointer; transition:0.3s; }
+    #checkBtn { background:#10b981; color:white; }
+    #checkBtn:hover { background:#059669; }
+    #reportBtn { background:#ef4444; color:white; display:none; animation:pulse 1.5s infinite; margin-top:20px; }
+    #reportBtn:hover { background:#dc2626; }
+    @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+    .result { margin-top:40px; font-size:1.4rem; }
+    .safe { color:#10b981; }
+    .danger { color:#ef4444; }
+    .confidence { font-size:2.5rem; font-weight:900; margin:15px 0; }
+    .counter { margin-top:50px; font-size:1.1rem; opacity:0.8; }
+    footer { margin-top:60px; font-size:0.9rem; opacity:0.7; }
+    .hidden { display:none; }
   </style>
 </head>
 <body>
   <div class="container">
+    <img src="logo.png" alt=".ng SafeCheck">
     <h1>.ng SafeCheck</h1>
     <p class="tagline">One click. Know if it's real.</p>
 
-    <!-- THIS INPUT IS NOW 100% TYPEABLE -->
-    <div class="input-box">
-      <input type="text" id="domain" placeholder="Type any .ng domain here..." autofocus />
-      <button id="checkBtn">Check Now</button>
+    <input type="text" id="domainInput" placeholder="Enter any .ng domain (e.g. login-gtb.com.ng)" autofocus />
+    <button id="checkBtn">CHECK NOW</button>
+
+    <div id="loading" class="hidden">Scanning with AI + WHOIS + VirusTotal...</div>
+
+    <div id="result" class="result hidden">
+      <div id="riskLevel" class="confidence"></div>
+      <div id="message"></div>
+      <div id="confidenceText"></div>
+      <button id="reportBtn">REPORT THIS FAKE SITE TO NiRA NOW</button>
     </div>
 
-    <div id="result" class="result">
-      <div id="status" class="big-text">SAFE</div>
-      <p id="recommendation">Enter a domain to check</p>
-      <div id="confidence" style="font-size:1.5rem;margin:1rem 0;"></div>
-      <button id="reportBtn">REPORT THIS FAKE SITE TO NiRA</button>
+    <div class="counter">
+      <strong id="blockedToday">0</strong> fake .ng sites reported to NiRA today
     </div>
 
-    <footer>NiRA-XT 2025 • Protecting Nigeria from phishing</footer>
+    <footer>
+      Built with love for Nigeria<br>
+      Live & Open Source: <a href="https://github.com/aajetechnology/.ng-SafeCheck" style="color:#10b981" target="_blank">github.com/aajetechnology/.ng-SafeCheck</a>
+    </footer>
   </div>
 
   <script>
-    const API_URL = "https://ng-safecheck.onrender.com/api/check";
-    let lastDomain = "";
+    const API_URL = "https://ng-safecheck.onrender.com/api/check"; // CHANGE ONLY THIS LINE IF NEEDED
+    const REPORT_URL = "https://ng-safecheck.onrender.com/report";
 
-    const input = document.getElementById("domain");
-    const btn = document.getElementById("checkBtn");
+    const input = document.getElementById("domainInput");
+    const checkBtn = document.getElementById("checkBtn");
+    const loading = document.getElementById("loading");
     const result = document.getElementById("result");
+    const riskLevel = document.getElementById("riskLevel");
+    const message = document.getElementById("message");
+    const confidenceText = document.getElementById("confidenceText");
     const reportBtn = document.getElementById("reportBtn");
+    const blockedToday = document.getElementById("blockedToday");
 
-    // Make input 100% focusable
-    input.focus();
-    input.addEventListener("input", () => input.value = input.value.toLowerCase());
-
-    btn.onclick = checkDomain;
-    input.addEventListener("keypress", e => e.key === "Enter" && checkDomain());
-    reportBtn.onclick = () => {
-      reportBtn.textContent = "REPORTED TO NiRA!";
-      reportBtn.classList.add("success");
-      reportBtn.disabled = true;
-      setTimeout(() => reportBtn.style.display = "none", 3000);
-    };
+    let currentDomain = "";
 
     async function checkDomain() {
-      let domain = input.value.trim();
-      if (!domain) return alert("Please enter a .ng domain");
+      let domain = input.value.trim().toLowerCase();
+      if (!domain) return alert("Please enter a domain");
+      if (!domain.includes(".")) domain += ".ng";
       if (!domain.endsWith(".ng")) domain += ".ng";
 
-      lastDomain = domain;
-      btn.textContent = "Checking...";
-      btn.disabled = true;
-      result.style.display = "block";
-      reportBtn.style.display = "none";
+      currentDomain = domain;
+      loading.classList.remove("hidden");
+      result.classList.add("hidden");
+      checkBtn.disabled = true;
 
       try {
         const res = await fetch(API_URL, {
@@ -155,23 +92,61 @@
         });
         const data = await res.json();
 
-        document.getElementById("status").textContent = data.risk;
-        document.getElementById("recommendation").textContent = data.recommendation;
-        document.getElementById("confidence").textContent = data.confidence > 0 ? `Confidence: ${data.confidence}%` : "";
+        loading.classList.add("hidden");
+        result.classList.remove("hidden");
 
-        result.className = "result " + (data.risk === "SAFE" ? "safe" : data.risk === "WARNING" ? "warning" : "danger");
+        blockedToday.textContent = data.blocked_today || 0;
 
-        if (data.risk === "WARNING" || data.risk === "DANGEROUS") {
+        if (data.safe) {
+          riskLevel.textContent = "SAFE";
+          riskLevel.className = "confidence safe";
+          message.textContent = data.recommendation;
+          confidenceText.textContent = "0% risk";
+          reportBtn.style.display = "none";
+        } else {
+          riskLevel.textContent = "DANGEROUS";
+          riskLevel.className = "confidence danger";
+          message.innerHTML = `<strong>${data.risk}</strong><br>${data.recommendation}`;
+          confidenceText.textContent = data.confidence.toFixed(1) + "% confidence";
           reportBtn.style.display = "block";
         }
-
-      } catch (e) {
-        alert("Backend offline — but it works on demo day!");
+      } catch (err) {
+        loading.classList.add("hidden");
+        alert("Scan failed — please try again");
+      } finally {
+        checkBtn.disabled = false;
+        input.select();
       }
-
-      btn.textContent = "Check Again";
-      btn.disabled = false;
     }
+
+    reportBtn.addEventListener("click", async () => {
+      reportBtn.disabled = true;
+      reportBtn.textContent = "Sending to NiRA...";
+
+      try {
+        const res = await fetch(REPORT_URL, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({domain: currentDomain})
+        });
+        const json = await res.json();
+
+        if (json.report_url) {
+          window.open(json.report_url, "_blank");
+          alert("Official NiRA report form opened!\nJust click SUBMIT — real takedown in progress.");
+        } else {
+          alert(json.message || "Report sent to NiRA!");
+        }
+      } catch {
+        window.open("https://nira.org.ng/abuse-report/", "_blank");
+      }
+      reportBtn.disabled = false;
+      reportBtn.textContent = "REPORT THIS FAKE SITE TO NiRA NOW";
+    });
+
+    checkBtn.addEventListener("click", checkDomain);
+    input.addEventListener("keypress", e => { if (e.key === "Enter") checkDomain(); });
+    input.select();
   </script>
 </body>
 </html>

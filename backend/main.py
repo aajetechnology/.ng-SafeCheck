@@ -196,10 +196,27 @@ async def health():
 
 @app.post("/report")
 async def public_report(request: Request):
-    data = await request.json()
-    logger.info(f"PUBLIC REPORT: {data.get('domain')} reported by user")
-    # You can forward to NiRA here
-    return {"status": "reported", "message": "Thank you! Fake site reported to NiRA."}
+    try:
+        data = await request.json()
+        domain = data.get("domain", "").strip()
+
+        if not domain.endswith(".ng"):
+            return {"status": "error", "message": "Only .ng domains"}
+
+        # REAL NiRA reporting — opens official form with domain pre-filled
+        report_url = f"https://nira.org.ng/abuse-report/?domain={domain}"
+
+        logger.info(f"USER REPORTED → {domain} (redirected to official NiRA form)")
+
+        return {
+            "status": "success",
+            "message": "Opening official NiRA abuse report form...",
+            "report_url": report_url
+        }
+
+    except Exception as e:
+        logger.error(f"Report error: {e}")
+        return {"status": "error", "message": "Failed — please report manually at nira.org.ng/abuse-report"}
 
 
 @app.get("/stats")
