@@ -1,4 +1,4 @@
-# core/whois.py — FINAL FIXED VERSION (nic.ng = SAFE FOREVER)
+# core/whois.py 
 import httpx
 from datetime import datetime
 import re

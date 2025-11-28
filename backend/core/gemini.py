@@ -1,4 +1,4 @@
-# core/gemini.py — FINAL VERSION (0% or 95%+ only)
+# core/gemini.py
 import re
 
 TRUSTED_DOMAINS = {

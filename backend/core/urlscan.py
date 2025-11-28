@@ -13,12 +13,12 @@ async def check(domain: str) -> dict | None:
         return None
 
     headers = {
-        "API-Key": URLSCAN_KEY,  # ← Exact header name!
+        "API-Key": URLSCAN_KEY,  
         "Content-Type": "application/json"
     }
     data = {
-        "url": f"https://{domain}",  # HTTPS for better scans
-        "visibility": "unlisted"  # Private by default
+        "url": f"https://{domain}",  
+        "visibility": "unlisted"  
     }
 
     try:
