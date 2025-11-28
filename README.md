@@ -51,7 +51,7 @@ Global tools miss Nigeria-specific tricks:
 | Emmanuel O. Agbaje    | Lead Developer & AI Engineer  | Full backend, Gemini AI, scoring system           |
 | Emmanuel O. Agbaje    | Threat Intel & DevOps         | OpenPhish, VirusTotal, URLScan, WHOIS, deploy     |
 | Abdulmuiz Ismail      | Frontend Developer            | Beautiful public web UI                           |
-| Jerrie                | UI/UX & Documentation         | Design, README, demo video                        |
+| Jerrie                | UI/UX & Documentation         | Design, README                                    |
 
 ### 5. Live Links (Tested 30 Nov 2025)
 🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳
