@@ -36,7 +36,7 @@ Global tools miss Nigeria-specific tricks:
 - Backend: Python 3.11 + FastAPI  
 - AI: Google Gemini 1.5 Flash  
 - Threat Intel: OpenPhish, VirusTotal, URLScan.io, NiRA WHOIS  
-- Deployment: Render.com (backend) + Netlify (frontend)  
+- Deployment: Render.com (backend) + Render (frontend)  
 🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳🇬🇳
 ### 3. Future Roadmap  
 - Launch **safecheck.ng** public checker  
