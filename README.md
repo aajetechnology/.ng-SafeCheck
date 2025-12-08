@@ -29,7 +29,6 @@ Global tools miss Nigeria-specific tricks:
 - <1 second response  
 - Detailed threat list + confidence score  
 - Auto-reports DANGEROUS domains to NiRA  
-- Live counter of domains blocked today  
 - Fully public — no login required  
 
 **Tech Stack**  
