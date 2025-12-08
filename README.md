@@ -28,7 +28,7 @@ Global tools miss Nigeria-specific tricks:
 **Features**  
 - <1 second response  
 - Detailed threat list + confidence score  
-- Auto-reports DANGEROUS domains to NiRA  
+-reports DANGEROUS domains to NiRA  
 - Fully public — no login required  
 
 **Tech Stack**  
